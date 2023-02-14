@@ -59,7 +59,7 @@ function Posts() {
         posts.map((post) => {
           return (
             <Post
-              key={post.id}
+              id={post._id}
               title={post.title}
               description={post.description}
               date={post.createdAt}
