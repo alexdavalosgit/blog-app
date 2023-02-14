@@ -2,16 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Posts from "../../components/post/Posts";
 import { baseAPI } from "../../utils";
+import { useLocation } from "react-router-dom";
 
 export default function Home() {
   // State
   const [posts, setPosts] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  // Const
+  const { search } = useLocation();
+  console.log("search", search);
+
   // Fetch all posts
   const fetchPosts = async () => {
     try {
       setIsLoading(true);
-      const url = `${baseAPI}/blogposts`;
+      const url = `${baseAPI}/blogposts/` + search;
+      console.log(url);
       const res = await fetch(url);
       const json = await res.json();
       if (res.ok) {
@@ -30,7 +36,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [search]);
 
   return (
     <div>

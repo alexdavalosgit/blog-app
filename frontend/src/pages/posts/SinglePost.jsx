@@ -54,7 +54,9 @@ function SinglePost() {
           <Card.Body>
             <Card.Title>{post.title}</Card.Title>
             <p>{new Date(post.updatedAt).toDateString()}</p>
-            <p>By {post.username}</p>
+            <Link to={`/?user=${post.username}`}>
+              <p>By {post.username}</p>
+            </Link>
             <Card.Text>
               {" "}
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
