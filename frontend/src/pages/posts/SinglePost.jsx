@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { baseAPI } from "../../utils";
 import Loading from "../../components/ui/Loading";
-import { Container, Card } from "react-bootstrap";
+import { Container, Card, Button } from "react-bootstrap";
 
 function SinglePost() {
   const [post, setPost] = useState();
@@ -39,12 +39,18 @@ function SinglePost() {
   }, []);
 
   return (
-    <Container>
+    <Container className="p-5">
+      <Link to={"/"}>
+        <Button className="mb-3">Back</Button>
+      </Link>
       {isLoading ? (
         <Loading />
       ) : post ? (
         <Card>
-          <Card.Img></Card.Img>
+          <Card.Img
+            src="https://images.unsplash.com/photo-1675410200389-903e50c46cbf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+            alt="nature img"
+          />
           <Card.Body>
             <Card.Title>{post.title}</Card.Title>
             <p>{new Date(post.updatedAt).toDateString()}</p>
