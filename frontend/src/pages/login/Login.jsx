@@ -24,9 +24,9 @@ function Login() {
           password: passwordRef.current.value,
         }),
       });
-      console.log("res", res);
+      const json = await res.json();
       if (res.ok) {
-        dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+        dispatch({ type: "LOGIN_SUCCESS", payload: json });
       } else {
         throw new Error(`Login failure with status ${res.status}`);
       }
@@ -40,12 +40,12 @@ function Login() {
     <Container>
       <Form onSubmit={handleSubmit}>
         <h2>Login</h2>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3">
           <Form.Label>Username</Form.Label>
           <Form.Control ref={userRef} type="username" placeholder="Username" />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3">
           <Form.Label>Password</Form.Label>
           <Form.Control
             ref={passwordRef}
@@ -54,7 +54,7 @@ function Login() {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" disabled={isFetching}>
           Sign In
         </Button>
       </Form>
