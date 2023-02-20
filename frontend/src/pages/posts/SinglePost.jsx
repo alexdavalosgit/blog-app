@@ -19,10 +19,8 @@ function SinglePost() {
       const url = `${baseAPI}/blogposts/${path}`;
       const res = await fetch(url);
       const json = await res.json();
-      console.log("json", json);
 
       if (res.ok) {
-        console.log(res.status);
         setPost(json);
         setIsLoading(false);
       } else {

@@ -18,7 +18,6 @@ function Posts({ posts, loading }) {
     setPosts(sortedItems);
   }; */
 
-  console.log("posts", posts);
   return (
     <Container className="px-5">
       {loading ? (

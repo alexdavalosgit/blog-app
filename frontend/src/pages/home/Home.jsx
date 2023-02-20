@@ -10,7 +10,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   // Const
   const { search } = useLocation();
-  console.log("search", search);
 
   // Fetch all posts
   const fetchPosts = async () => {
@@ -21,8 +20,6 @@ export default function Home() {
       const res = await fetch(url);
       const json = await res.json();
       if (res.ok) {
-        console.log("200 status");
-        console.log("json", json);
         setPosts(json);
         setIsLoading(false);
       } else {
