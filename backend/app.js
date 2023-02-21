@@ -6,6 +6,7 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const blogPostRoute = require("./routes/blogposts");
 const categoryRoute = require("./routes/categories");
+const path = require("path");
 
 const app = express();
 app.use(express.json());
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
   //allow request to continue and be handled by routes
   next();
 });
+app.use("images", express.static(path.join(__dirname, "/images")));
 
 // Connect DB
 mongoose
@@ -49,7 +51,10 @@ const storage = multer.diskStorage({
 });
 
 // Handle image upload
-const upload = multer({ storage: storage });
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1024 * 1024 * 5 },
+});
 app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json("File has been uploaded.");
 });

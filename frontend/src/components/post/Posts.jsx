@@ -36,6 +36,7 @@ function Posts({ posts, loading }) {
                 date={post.createdAt}
                 username={post.username}
                 category={post.category}
+                image={post.photo}
               />
             );
           })}

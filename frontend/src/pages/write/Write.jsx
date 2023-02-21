@@ -37,14 +37,12 @@ function Write() {
     const fileName = Date.now() + newFile.name;
     formData.append("name", fileName);
     formData.append("file", newFile);
+    console.log("formData", formData);
     try {
       const url = `${baseAPI}/upload`;
       const res = await fetch(url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: formData,
       });
       if (res.ok) {
         console.log("uploaded to multer..");
@@ -70,6 +68,7 @@ function Write() {
       console.log("error creating post");
     }
   };
+  console.log("url", `${baseAPI}/upload`);
   return (
     <Container className="py-5 text-center write-container">
       {file ? (
