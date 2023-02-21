@@ -29,7 +29,7 @@ app.use((req, res, next) => {
   //allow request to continue and be handled by routes
   next();
 });
-app.use("images", express.static(path.join(__dirname, "/images")));
+app.use("/images", express.static(path.join(__dirname, "/images")));
 
 // Connect DB
 mongoose

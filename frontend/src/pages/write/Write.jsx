@@ -16,6 +16,7 @@ function Write() {
     category: "",
   });
   const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,7 +27,7 @@ function Write() {
       return {
         ...prevValue,
         [name]: value,
-        photo: file.name,
+        photo: fileName,
       };
     });
   };
@@ -35,6 +36,7 @@ function Write() {
     const newFile = event.target.files[0];
     const formData = new FormData();
     const fileName = Date.now() + newFile.name;
+    setFileName(fileName);
     formData.append("name", fileName);
     formData.append("file", newFile);
     console.log("formData", formData);
