@@ -11,19 +11,48 @@ function Write() {
   const [newPost, setNewPost] = useState({
     title: "",
     description: "",
-    photo: "",
+    photo: null,
     username: user.username,
     category: "",
   });
+  const [file, setFile] = useState(null);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    if (name === "photo") {
+      setFile(event.target.files[0]);
+    }
     setNewPost((prevValue) => {
       return {
         ...prevValue,
         [name]: value,
+        photo: file.name,
       };
     });
+  };
+
+  const handleFileChange = async (event) => {
+    const newFile = event.target.files[0];
+    const formData = new FormData();
+    const fileName = Date.now() + newFile.name;
+    formData.append("name", fileName);
+    formData.append("file", newFile);
+    try {
+      const url = `${baseAPI}/upload`;
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        console.log("uploaded to multer..");
+        setFile(newFile);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSubmit = async () => {
@@ -43,14 +72,29 @@ function Write() {
   };
   return (
     <Container className="py-5 text-center write-container">
-      <Image
-        fluid
-        src="https://images.unsplash.com/photo-1617575521317-d2974f3b56d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80"
-        alt="caption img"
-        className="header-img py-2"
-      />
+      {file ? (
+        <Image
+          fluid
+          src={URL.createObjectURL(file)}
+          alt="blog img"
+          className="header-img py-2"
+        />
+      ) : (
+        <Image
+          fluid
+          src="https://images.unsplash.com/photo-1617575521317-d2974f3b56d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80"
+          alt="caption img"
+          className="header-img py-2"
+        />
+      )}
       <Form onSubmit={handleSubmit} className="py-3">
         <h2 className="mb-3">Create a new blog posts.</h2>
+
+        <Form.Group controlId="formFile" className="mb-3">
+          <Form.Control type="file" name="photo" onChange={handleFileChange} />
+          <Form.Label>Upload an image (optional)</Form.Label>
+        </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Control
             onChange={handleChange}
