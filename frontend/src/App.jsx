@@ -7,6 +7,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
 import Write from "./pages/write/Write";
+import Profile from "./pages/profile/Profile";
 import { AuthContext } from "./context/authcontext/AuthContext";
 
 export default function App() {
@@ -34,6 +35,7 @@ export default function App() {
             path="/blogposts/:blogPostId"
             element={<SinglePosts />}
           ></Route>
+          <Route path="/profile/:username" element={<Profile />} />
         </Routes>
       </Router>
     </div>

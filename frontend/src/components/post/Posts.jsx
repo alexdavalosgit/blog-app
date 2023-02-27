@@ -29,15 +29,17 @@ function Posts({ posts, loading }) {
           <h4 className="text-center py-3">Blog posts by </h4>
           {posts.map((post) => {
             return (
-              <Post
-                id={post._id}
-                title={post.title}
-                description={post.description}
-                date={post.createdAt}
-                username={post.username}
-                category={post.category}
-                image={post.photo}
-              />
+              <div key={post._id}>
+                <Post
+                  id={post._id}
+                  title={post.title}
+                  description={post.description}
+                  date={post.createdAt}
+                  username={post.username}
+                  category={post.category}
+                  image={post.photo}
+                />
+              </div>
             );
           })}
         </>

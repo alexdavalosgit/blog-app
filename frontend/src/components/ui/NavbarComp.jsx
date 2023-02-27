@@ -31,8 +31,8 @@ export default function NavbarComp() {
               </Nav.Link>
             )}
             {user ? (
-              <Nav.Link disabled>
-                <span>{user["username"]}</span>
+              <Nav.Link as={Link} to={`/profile/${user.username}`}>
+                My Profile
               </Nav.Link>
             ) : (
               ""
