@@ -1,35 +1,40 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Container, Button, Row, Col } from "react-bootstrap";
 import Post from "./Post";
 import Loading from "../ui/Loading";
+import { baseAPI } from "../../utils";
 
-function Posts({ posts, loading }) {
-  /*   const handleSortByLatest = () => {
-    // Sort by latest
-    const sortByLatest = (arr) => {
-      console.log("calling sort");
-      if (!arr) return;
-      arr.sort((a, b) => {
-        return new Date(b.createdAt) - new Date(a.createdAt);
+function Posts({ posts, loading, user }) {
+  const handleDelete = async (postId) => {
+    try {
+      const url = `${baseAPI}/blogposts/${postId}`;
+      const res = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ username: user }),
       });
-    };
-
-    const sortedItems = sortByLatest([...posts]);
-    setPosts(sortedItems);
-  }; */
-
+      if (res.ok) {
+        console.log(`Deleted posts ${postId}`);
+      } else {
+        console.log(`Failed with res ${res.status}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Container className="px-5">
-      {loading ? (
-        <Loading />
-      ) : !posts ? (
-        <p>Failed to load data. Please try again later.</p>
-      ) : (
-        <>
-          <h4 className="text-center py-3">Blog posts by </h4>
+      {loading && <Loading />}
+      {posts && posts.length > 0 ? (
+        <Row>
           {posts.map((post) => {
+            const isUserPost = post.username === user;
             return (
-              <div key={post._id}>
+              <Col md={4} key={post._id}>
                 <Post
                   id={post._id}
                   title={post.title}
@@ -38,11 +43,17 @@ function Posts({ posts, loading }) {
                   username={post.username}
                   category={post.category}
                   image={post.photo}
+                  isUserPost={isUserPost}
+                  handleDelete={handleDelete}
                 />
-              </div>
+              </Col>
             );
           })}
-        </>
+        </Row>
+      ) : posts && posts.length === 0 ? (
+        <h2>You have not made any blog posts. Start posting now!</h2>
+      ) : (
+        <h2>Trouble fetching posts. Try again...</h2>
       )}
     </Container>
   );

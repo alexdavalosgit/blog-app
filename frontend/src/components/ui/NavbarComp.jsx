@@ -12,7 +12,7 @@ export default function NavbarComp() {
   };
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" className="mb-5">
       <Container>
         <Navbar.Brand>Blog App</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -32,7 +32,7 @@ export default function NavbarComp() {
             )}
             {user ? (
               <Nav.Link as={Link} to={`/profile/${user.username}`}>
-                My Profile
+                My Posts
               </Nav.Link>
             ) : (
               ""

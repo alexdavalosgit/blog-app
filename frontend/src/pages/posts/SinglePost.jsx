@@ -63,49 +63,54 @@ function SinglePost() {
             <Link to={`/profile?=${post.username}`}>
               <p>By {post.username}</p>
             </Link>
-            <Card.Text>
-              {" "}
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. A
-              lacus vestibulum sed arcu non odio euismod lacinia. Tincidunt dui
-              ut ornare lectus sit amet est. Etiam non quam lacus suspendisse
-              faucibus interdum posuere lorem ipsum. Faucibus pulvinar elementum
-              integer enim neque volutpat. A diam sollicitudin tempor id eu nisl
-              nunc mi. Duis convallis convallis tellus id interdum velit. Amet
-              aliquam id diam maecenas ultricies. Sapien pellentesque habitant
-              morbi tristique senectus et netus et malesuada. Blandit libero
-              volutpat sed cras ornare arcu. Ac feugiat sed lectus vestibulum.
-              Ornare quam viverra orci sagittis eu volutpat odio facilisis
-              mauris. Euismod nisi porta lorem mollis aliquam ut porttitor leo.
-              Scelerisque fermentum dui faucibus in ornare quam viverra orci
-              sagittis. Aliquam sem fringilla ut morbi tincidunt augue interdum
-              velit. Donec pretium vulputate sapien nec sagittis aliquam
-              malesuada. Orci porta non pulvinar neque laoreet. Fermentum leo
-              vel orci porta non. Turpis massa tincidunt dui ut. At imperdiet
-              dui accumsan sit amet. Nunc scelerisque viverra mauris in aliquam
-              sem fringilla ut. Porta lorem mollis aliquam ut porttitor leo.
-              Nulla facilisi nullam vehicula ipsum a. Ultrices neque ornare
-              aenean euismod elementum nisi quis eleifend quam. Enim lobortis
-              scelerisque fermentum dui faucibus. Mauris in aliquam sem
-              fringilla ut. In fermentum posuere urna nec tincidunt. In mollis
-              nunc sed id semper risus in hendrerit. Id donec ultrices tincidunt
-              arcu non sodales neque sodales. Pellentesque elit eget gravida cum
-              sociis natoque penatibus. Platea dictumst quisque sagittis purus
-              sit amet. Proin gravida hendrerit lectus a. Sed tempus urna et
-              pharetra pharetra massa. Hac habitasse platea dictumst vestibulum
-              rhoncus est pellentesque. Ut eu sem integer vitae justo eget magna
-              fermentum iaculis. Ornare quam viverra orci sagittis eu. Habitasse
-              platea dictumst quisque sagittis purus sit amet volutpat.
-              Vestibulum mattis ullamcorper velit sed. Integer quis auctor elit
-              sed. Libero justo laoreet sit amet cursus. Potenti nullam ac
-              tortor vitae purus. Sagittis vitae et leo duis ut diam. Ornare
-              arcu odio ut sem nulla pharetra diam sit. Magna sit amet purus
-              gravida quis blandit turpis. Quisque egestas diam in arcu cursus
-              euismod quis viverra nibh. Quam adipiscing vitae proin sagittis
-              nisl rhoncus mattis. Turpis massa sed elementum tempus egestas sed
-              sed risus pretium. Massa vitae tortor condimentum lacinia quis vel
-              eros donec.
-            </Card.Text>
+            {post.description ? (
+              <Card.Text>{post.description}</Card.Text>
+            ) : (
+              <Card.Text>
+                {" "}
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. A
+                lacus vestibulum sed arcu non odio euismod lacinia. Tincidunt
+                dui ut ornare lectus sit amet est. Etiam non quam lacus
+                suspendisse faucibus interdum posuere lorem ipsum. Faucibus
+                pulvinar elementum integer enim neque volutpat. A diam
+                sollicitudin tempor id eu nisl nunc mi. Duis convallis convallis
+                tellus id interdum velit. Amet aliquam id diam maecenas
+                ultricies. Sapien pellentesque habitant morbi tristique senectus
+                et netus et malesuada. Blandit libero volutpat sed cras ornare
+                arcu. Ac feugiat sed lectus vestibulum. Ornare quam viverra orci
+                sagittis eu volutpat odio facilisis mauris. Euismod nisi porta
+                lorem mollis aliquam ut porttitor leo. Scelerisque fermentum dui
+                faucibus in ornare quam viverra orci sagittis. Aliquam sem
+                fringilla ut morbi tincidunt augue interdum velit. Donec pretium
+                vulputate sapien nec sagittis aliquam malesuada. Orci porta non
+                pulvinar neque laoreet. Fermentum leo vel orci porta non. Turpis
+                massa tincidunt dui ut. At imperdiet dui accumsan sit amet. Nunc
+                scelerisque viverra mauris in aliquam sem fringilla ut. Porta
+                lorem mollis aliquam ut porttitor leo. Nulla facilisi nullam
+                vehicula ipsum a. Ultrices neque ornare aenean euismod elementum
+                nisi quis eleifend quam. Enim lobortis scelerisque fermentum dui
+                faucibus. Mauris in aliquam sem fringilla ut. In fermentum
+                posuere urna nec tincidunt. In mollis nunc sed id semper risus
+                in hendrerit. Id donec ultrices tincidunt arcu non sodales neque
+                sodales. Pellentesque elit eget gravida cum sociis natoque
+                penatibus. Platea dictumst quisque sagittis purus sit amet.
+                Proin gravida hendrerit lectus a. Sed tempus urna et pharetra
+                pharetra massa. Hac habitasse platea dictumst vestibulum rhoncus
+                est pellentesque. Ut eu sem integer vitae justo eget magna
+                fermentum iaculis. Ornare quam viverra orci sagittis eu.
+                Habitasse platea dictumst quisque sagittis purus sit amet
+                volutpat. Vestibulum mattis ullamcorper velit sed. Integer quis
+                auctor elit sed. Libero justo laoreet sit amet cursus. Potenti
+                nullam ac tortor vitae purus. Sagittis vitae et leo duis ut
+                diam. Ornare arcu odio ut sem nulla pharetra diam sit. Magna sit
+                amet purus gravida quis blandit turpis. Quisque egestas diam in
+                arcu cursus euismod quis viverra nibh. Quam adipiscing vitae
+                proin sagittis nisl rhoncus mattis. Turpis massa sed elementum
+                tempus egestas sed sed risus pretium. Massa vitae tortor
+                condimentum lacinia quis vel eros donec.
+              </Card.Text>
+            )}
           </Card.Body>
         </Card>
       ) : (

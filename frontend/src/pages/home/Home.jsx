@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <div>
       <Container>
-        <h3 className="py-2 text-center">Home</h3>
+        <h3 className="py-4 text-center">Latest Blogs</h3>
         <Posts posts={posts} loading={isLoading} />
       </Container>
     </div>
