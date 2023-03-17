@@ -70,7 +70,6 @@ function Write() {
       console.log("error creating post");
     }
   };
-  console.log("url", `${baseAPI}/upload`);
   return (
     <Container className="py-5 text-center write-container">
       {file ? (

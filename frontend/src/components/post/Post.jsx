@@ -1,24 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/authcontext/AuthContext";
 
-function Post({
-  id,
-  title,
-  description,
-  date,
-  image,
-  username,
-  handleDelete,
-  isUserPost,
-  onError,
-}) {
+function Post({ id, title, description, date, image, username, onError }) {
   // const
 
   const PF = "http://localhost:9000/images/";
 
   // state
+  const [updateMode, setUpdateMode] = useState(false);
   const [imageUrl, setImageUrl] = useState(
     image
       ? PF + image
@@ -39,6 +29,7 @@ function Post({
       );
     }
   };
+
   return (
     <Card className="mb-3">
       <Card.Img src={imageUrl} alt="blog img" onError={handleError} />
@@ -46,16 +37,6 @@ function Post({
         <Link to={`/blogposts/${id}`}>
           <Card.Title>{title}</Card.Title>
         </Link>
-        {isUserPost && (
-          <div>
-            <Button variant="success" size="sm">
-              <Link to={`/edit/${id}`}>Edit</Link>
-            </Button>
-            <Button variant="danger" size="sm" onClick={() => handleDelete(id)}>
-              Delete
-            </Button>
-          </div>
-        )}
         <p className="fw-bold">{new Date(date).toDateString()}</p>
         <Card.Text className="fw-bold">by {username}</Card.Text>
         <Card.Text>{description}</Card.Text>
