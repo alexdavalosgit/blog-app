@@ -28,20 +28,30 @@ router.post("/register", async (req, res) => {
 // Login
 router.post("/login", async (req, res) => {
   try {
-    // check user credentials
     const user = await User.findOne({ username: req.body.username });
-    !user && res.status(400).json("Incorrect credentials entered!");
+    if (!user) {
+      if (!res.headersSent) {
+        res.status(400).json("Incorrect credentials entered!");
+      }
+      return;
+    }
 
-    // check password credentials
     const validated = await bcrypt.compare(req.body.password, user.password);
-    !validated && res.status(400).json("Incorrect credentials entered!");
+    if (!validated) {
+      if (!res.headersSent) {
+        res.status(400).json("Incorrect credentials entered!");
+      }
+      return;
+    }
 
-    // remove password from response
     const { password, ...others } = user._doc;
-
-    res.status(200).json(others);
+    if (!res.headersSent) {
+      res.status(200).json(others);
+    }
   } catch (error) {
-    res.status(500).json(error);
+    if (!res.headersSent) {
+      res.status(500).json(error);
+    }
   }
 });
 

@@ -66,7 +66,7 @@ router.get("/:id", async (req, res) => {
     const blogPost = await BlogPost.findById(req.params.id);
     res.status(200).json(blogPost);
   } catch (error) {
-    res.status(500).json(err);
+    res.status(500).json(error);
   }
 });
 
@@ -92,5 +92,8 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// Get All Post by ID
+router.get("/:id", async (req, res) => {});
 
 module.exports = router;
