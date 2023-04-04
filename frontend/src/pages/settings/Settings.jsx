@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Form, Button } from "react-bootstrap";
+import { AuthContext } from "../../context/authcontext/AuthContext";
 
 function Settings() {
-  return <div>Settings</div>;
+  const { user } = useContext(AuthContext);
+  const [userData, setUserData] = useState(user);
+
+  console.log("user", user);
+  return (
+    <Form className="container">
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check type="checkbox" label="Check me out" />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Update
+      </Button>
+    </Form>
+  );
 }
 
 export default Settings;

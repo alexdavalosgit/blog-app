@@ -39,7 +39,6 @@ function Post({ id, title, description, date, image, username, onError }) {
         </Link>
         <p className="fw-bold">{new Date(date).toDateString()}</p>
         <Card.Text className="fw-bold">by {username}</Card.Text>
-        <Card.Text>{description}</Card.Text>
       </Card.Body>
     </Card>
   );

@@ -5,9 +5,9 @@ import Loading from "../../components/ui/Loading";
 import { Container, Card, Button, InputGroup, Form } from "react-bootstrap";
 import { AuthContext } from "../../context/authcontext/AuthContext";
 import "./SinglePost.css";
-import PostImage from "./PostImage";
-import PostTitle from "./PostTitle";
-import PostDescription from "./PostDescription";
+import PostImage from "../../components/post/PostImage";
+import PostTitle from "../../components/post/PostTitle";
+import PostDescription from "../../components/post/PostDescription";
 
 function SinglePost() {
   // state

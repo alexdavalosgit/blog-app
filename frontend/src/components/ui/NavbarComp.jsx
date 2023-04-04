@@ -14,7 +14,7 @@ export default function NavbarComp() {
   return (
     <Navbar bg="light" expand="lg" className="mb-5">
       <Container>
-        <Navbar.Brand>Blog App</Navbar.Brand>
+        <Navbar.Brand>MyBlogSpace</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -30,12 +30,15 @@ export default function NavbarComp() {
                 Register
               </Nav.Link>
             )}
-            {user ? (
+            {user && (
               <Nav.Link as={Link} to={`/profile/${user.username}`}>
                 My Posts
               </Nav.Link>
-            ) : (
-              ""
+            )}
+            {user && (
+              <Nav.Link as={Link} to={`/settings`}>
+                Settings
+              </Nav.Link>
             )}
             {user ? (
               <Button variant="dark" onClick={handleLogout}>
