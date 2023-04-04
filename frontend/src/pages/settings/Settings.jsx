@@ -6,24 +6,52 @@ function Settings() {
   const { user } = useContext(AuthContext);
   const [userData, setUserData] = useState(user);
 
-  console.log("user", user);
+  // function to update userData state based on form input
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  };
+
+  console.log("user", userData);
   return (
     <Form className="container">
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Control
+          type="email"
+          placeholder={userData.email}
+          onChange={handleChange}
+          name="email"
+        />
         <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
+          Enter your new email address.
         </Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Label>Current Password</Form.Label>
+        <Form.Control type="password" placeholder="Current Password" />
+        <Form.Text className="text-muted">
+          Changing Password? Please enter your current password.
+        </Form.Text>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
+
+      <Form.Group className="mb-3">
+        <Form.Label>New Password</Form.Label>
+        <Form.Control
+          className="mb-2"
+          type="password"
+          placeholder="Enter new password"
+        />
+        <Form.Control type="password" placeholder="Re-enter new password." />
+        <Form.Text className="text-muted">
+          Please enter your new password.
+        </Form.Text>
       </Form.Group>
+
       <Button variant="primary" type="submit">
         Update
       </Button>
