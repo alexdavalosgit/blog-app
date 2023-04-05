@@ -3,6 +3,7 @@ import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/authcontext/AuthContext";
 import { baseAPI } from "../../utils";
+import AvatarDropdown from "./AvatarDropdown";
 
 export default function NavbarComp() {
   const { user, dispatch } = useContext(AuthContext);
@@ -31,24 +32,16 @@ export default function NavbarComp() {
               </Nav.Link>
             )}
             {user && (
-              <Nav.Link as={Link} to={`/profile/${user.username}`}>
-                My Posts
-              </Nav.Link>
-            )}
-            {user && (
               <Nav.Link as={Link} to={`/settings`}>
                 Settings
               </Nav.Link>
             )}
-            {user ? (
-              <Button variant="dark" onClick={handleLogout}>
-                Logout
-              </Button>
-            ) : (
+            {!user && (
               <Button as={Link} to="/login" variant="dark">
                 Login
               </Button>
             )}
+            {user && <AvatarDropdown logout={handleLogout} />}
           </Nav>
         </Navbar.Collapse>
       </Container>
