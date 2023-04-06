@@ -3,6 +3,7 @@ import { Container, Form, InputGroup, Button, Image } from "react-bootstrap";
 import { baseAPI } from "../../utils";
 import { AuthContext } from "../../context/authcontext/AuthContext";
 import "./write.css";
+import ImageUpload from "../../components/ui/ImageUpload";
 
 function Write() {
   // Const
@@ -15,44 +16,25 @@ function Write() {
     username: user.username,
     category: "",
   });
-  const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState();
+  const [filePreview, setFilePreview] = useState(null);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "photo") {
-      setFile(event.target.files[0]);
-    }
     setNewPost((prevValue) => {
       return {
         ...prevValue,
         [name]: value,
-        photo: fileName,
       };
     });
   };
 
-  const handleFileChange = async (event) => {
-    const newFile = event.target.files[0];
-    const formData = new FormData();
-    const fileName = Date.now() + newFile.name;
-    setFileName(fileName);
-    formData.append("name", fileName);
-    formData.append("file", newFile);
-    console.log("formData", formData);
-    try {
-      const url = `${baseAPI}/upload`;
-      const res = await fetch(url, {
-        method: "POST",
-        body: formData,
-      });
-      if (res.ok) {
-        console.log("uploaded to multer..");
-        setFile(newFile);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const handleImageChange = (fileName) => {
+    setNewPost((prevValue) => {
+      return {
+        ...prevValue,
+        photo: fileName,
+      };
+    });
   };
 
   const handleSubmit = async () => {
@@ -72,10 +54,10 @@ function Write() {
   };
   return (
     <Container className="py-5 text-center write-container">
-      {file ? (
+      {filePreview ? (
         <Image
           fluid
-          src={URL.createObjectURL(file)}
+          src={URL.createObjectURL(filePreview)}
           alt="blog img"
           className="header-img py-2"
         />
@@ -90,10 +72,10 @@ function Write() {
       <Form onSubmit={handleSubmit} className="py-3">
         <h2 className="mb-3">Create a new blog posts.</h2>
 
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Control type="file" name="photo" onChange={handleFileChange} />
-          <Form.Label>Upload an image (optional)</Form.Label>
-        </Form.Group>
+        <ImageUpload
+          handleImageChange={handleImageChange}
+          setFilePreview={setFilePreview}
+        />
 
         <Form.Group className="mb-3">
           <Form.Control

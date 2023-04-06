@@ -13,17 +13,16 @@ function AvatarDropdown({ logout }) {
 
   return (
     <div className="avatar-dropdown">
-      <button className="avatar-btn">
+      <button
+        className="avatar-btn"
+        onClick={() => setShowDropdown(!showDropdown)}
+      >
         <Image
           src={user.image == "" ? user.image : defaultAvatarImg}
           alt="Avatar"
           className="avatar-img"
         />
-        <FontAwesomeIcon
-          icon={faChevronDown}
-          className="dropdown-icon"
-          onClick={() => setShowDropdown(!showDropdown)}
-        />
+        <FontAwesomeIcon icon={faChevronDown} className="dropdown-icon" />
       </button>
       {showDropdown && (
         <div className="dropdown-content">
